@@ -72,7 +72,7 @@ subproceso esFechaLogica(fecha)
 FinSubproceso
 
 Inicio algoritmo
-validarRegistrosStock(stock, validos, stockmin)
+validarRegistrosStock(archivostock, archivovalidos)
 FinAlgoritmo 
 
 
