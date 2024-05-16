@@ -10,19 +10,12 @@ campo anterior es del 201 al 500, este campo debe ser del 400 al 450.
 · Existencia: debe ser mayor que el stock mínimo y menor o igual que stock máximo.
 Los registros que no cumplen las condiciones especificadas se deben imprimir
 
-Subproceso validarTransaccionesStock(archivoEntrada, archivoSalidaValidos, stockMinimo, stockMaximo)
-    abrir archivoEntrada modo lectura
-    abrir archivoSalidaValidos modo escritura
+Subproceso validarTransaccionesStock(archivoEntrada, archivoSalidaValidos)
+    abrir archivoEntrada(numeroArticulo, ubicacion, almacen, deposito, existencia, stockMinimo, stockMaximo) modo lectura
+    abrir archivoSalidaValidos(numeroArticulo, ubicacion, almacen, deposito, existencia, stockMinimo, stockMaximo) modo escritura
 
     Mientras NOF(archivoEntrada)
         leer registro del archivoEntrada
-        
-        // Extraer campos del registro
-        numeroArticulo = registro.numeroArticulo
-        ubicacion = registro.ubicacion
-        almacen = registro.almacen
-        deposito = registro.deposito
-        existencia = registro.existencia
 
         // Validar campos
         esValido = true
@@ -63,9 +56,6 @@ FinSubproceso
 
 
 Inicio Algoritmo 
-Escribir "Indica el stock minimo y luego el stock maximo";
-Leer stockmin;
-Leer stockmax;
 validarTransaccionesStock(transacciones, transaccionesvalidas, stockmin, stockmax)
 Escribir "Los registros validos fueron guardados en el archivo transaccionesvalidas exitosamente" 
 FinAlgoritmo 
