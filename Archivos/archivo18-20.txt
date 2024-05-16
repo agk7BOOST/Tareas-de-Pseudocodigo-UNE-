@@ -1,0 +1,57 @@
+18. Sabiendo que en la facultad hay 1.000 alumnos y que en el archivo se registran los
+siguientes datos por cada alumno: Número de alumno - Nombre - Sexo - Edad - curso
+Hacer un algoritmo que permita encontrar el alumno de sexo masculino de mayor edad y el
+de sexo femenino de menor edad. Imprimir los siguientes datos de estos alumnos:
+- Número de alumno
+- Edad
+- Curso
+- Código de sexo: 1=masculino, 2=feminino.
+
+Inicio
+    abrir archivoAlumnos(numero, nombre, sexo, edad, curso) modo lectura
+    i=0;
+    // Inicializar variables para almacenar los alumnos extremos
+    mayorEdadMasculino=-1;
+    alumnoMayorEdadMasculino=null;
+
+    menorEdadFemenino=1000 // Asumimos que la edad máxima posible es menor que este valor
+    alumnoMenorEdadFemenino=null
+
+    Mientras i<1000 Hacer
+        leer registro del archivoAlumnos
+
+        // Extraer campos del registro
+        numeroAlumno=registro.numeroAlumno
+        nombre=registro.nombre
+        sexo=registro.sexo
+        edad=registro.edad
+        curso=registro.curso
+
+        Si sexo==1 entonces // Masculino
+            Si edad>mayorEdadMasculino entonces
+                mayorEdadMasculino=edad;
+                alumnoMayorEdadMasculino=registro;
+        Sino Si sexo==2 Entonces // Femenino
+            Si edad<menorEdadFemenino entonces
+                menorEdadFemenino=edad;
+                alumnoMenorEdadFemenino=registro;
+	FinSi
+	i++
+    FinMientras
+    cerrar archivoAlumnos
+    // Imprimir resultados
+    Si alumnoMayorEdadMasculino!=null Entonces
+        imprimir "Alumno masculino de mayor edad:"
+        imprimir "Número de alumno: " + alumnoMayorEdadMasculino.numeroAlumno
+        imprimir "Edad: " + alumnoMayorEdadMasculino.edad
+        imprimir "Curso: " + alumnoMayorEdadMasculino.curso
+        imprimir "Código de sexo: 1 (masculino)"
+    FinSi
+    Si alumnoMenorEdadFemenino!=null Entonces
+        imprimir "Alumna femenina de menor edad:"
+        imprimir "Número de alumno: " + alumnoMenorEdadFemenino.numeroAlumno
+        imprimir "Edad: " + alumnoMenorEdadFemenino.edad
+        imprimir "Curso: " + alumnoMenorEdadFemenino.curso
+        imprimir "Código de sexo: 2 (femenino)"
+    FinSi
+Fin

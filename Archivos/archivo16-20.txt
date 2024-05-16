@@ -1,0 +1,28 @@
+16. Preparar un informe sobre existencia de artículos. Para eso se dispone de un archivo
+maestro de stock, donde cada registro tiene entre otros campos: Nº de identificación del
+artículo y existencia.
+Imprimir avisos en caso de que:
+a) Existencia = 250 ... Aviso: pedir dentro de una semana
+b) Existencia <250 ... Aviso: punto crítico - pasar pedido
+c) Existencia = 0...... Aviso: existencia agotada.
+Cada vez que haya un mensaje debe imprimirse además el número de identificación del
+artículo.
+
+Inicio algoritmo
+    abrir archivoMaestro(ID, Existencia) modo lectura
+    Mientras  NOF()
+        leer registro
+        // Extraer campos del registro
+        numeroIdentificacion=ID;
+        existencia=Existencia;
+
+        Si existencia==250 entonces
+            imprimir "Nº de identificación del artículo: " + numeroIdentificacion + " - Aviso: pedir dentro de una semana"
+        Sino Si existencia<250 and existencia > 0 Entonces
+            imprimir "Nº de identificación del artículo: " + numeroIdentificacion + " - Aviso: punto crítico - pasar pedido"
+        Sino Si existencia==0 entonces
+            imprimir "Nº de identificación del artículo: " + numeroIdentificacion + " - Aviso: existencia agotada"
+	FinSi
+   FinMientras
+    cerrar archivoMaestro
+Fin 

@@ -1,0 +1,59 @@
+19. Se tienen en un archivo los datos referentes a las ciudades del país, cada registro
+contiene: Código de la ciudad - Nombre de la ciudad - Distancia a Asunción en Km.
+Desarrollar un algoritmo que permita encontrar cuál es la ciudad más alejada y cuál es la
+más cercana a Asunción. Al final imprimir el nombre de las ciudades y las distancias de las
+mismas a Asunción. El último registro no procesable tiene 0 en el campo Código de ciudad.
+En la búsqueda de esas ciudades no se debe tener en cuenta Fdo. De la Mora ni Lambaré,
+cuyos códigos son 1 y 7 respectivamente.
+
+Inicio algoritmo 
+    abrir archivoCiudades(codigo, nombre, distanciaAsuncion) modo lectura
+
+    // Inicializar variables para almacenar las ciudades extremas
+    ciudadMasCercana=null;
+    distanciaMasCercana=infinito;
+
+    ciudadMasAlejada=null
+    distanciaMasAlejada= -1
+
+    Mientras NOF() Hacer
+        leer registro
+        // Extraer campos del registro
+        codigoCiudad=registro.codigoCiudad;
+        nombreCiudad=registro.nombreCiudad;
+        distanciaAsuncion=registro.distanciaAsuncion;
+
+        // Verificar si es el último registro no procesable
+        Si codigoCiudad==0 entonces
+            romper;
+	FinSi
+        // Excluir Fdo. de la Mora (código 1) y Lambaré (código 7)
+        Si codigoCiudad==1 O codigoCiudad==7 entonces
+            saltar;
+	FinSi
+        // Encontrar la ciudad más cercana
+        Si distanciaAsuncion<distanciaMasCercana entonces
+            distanciaMasCercana=distanciaAsuncion;
+            ciudadMasCercana=registro;
+	FinSi 
+        // Encontrar la ciudad más alejada
+        Si distanciaAsuncion>distanciaMasAlejada entonces
+            distanciaMasAlejada=distanciaAsuncion;
+            ciudadMasAlejada=registro;
+	FinSi
+    FinMientras
+    cerrar archivoCiudades
+
+    // Imprimir resultados
+    Si ciudadMasCercana!=null entonces
+        imprimir "Ciudad más cercana a Asunción:"
+        imprimir "Nombre de la ciudad: " + ciudadMasCercana.nombreCiudad
+        imprimir "Distancia a Asunción: " + ciudadMasCercana.distanciaAsuncion + " km"
+    FinSi
+    Si ciudadMasAlejada!=null entonces
+        imprimir "Ciudad más alejada de Asunción:"
+        imprimir "Nombre de la ciudad: " + ciudadMasAlejada.nombreCiudad
+        imprimir "Distancia a Asunción: " + ciudadMasAlejada.distanciaAsuncion + " km"
+    FinSi
+Fin
+

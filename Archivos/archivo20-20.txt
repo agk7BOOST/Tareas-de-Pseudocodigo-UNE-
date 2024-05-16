@@ -1,0 +1,35 @@
+20. Se tiene un conjunto de registros, cada uno de ellos con los siguientes datos:
+Número de la persona - Monto que debe abonar (M1) - Monto que entrega (M2).
+Desarrolla un algoritmo que verifique el proceso a seguir para dar el vuelto e imprima los
+siguientes datos por cada registro:
+Número de la persona - M1 - M2 - Vuelto
+Al final se desea la sumatoria de los montos abonados. Se deben prever posibles errores
+(M2 < M1, etc.).
+
+Inicio Algoritmo
+    abrir archivo(Numero, M1, M2) modo lectura
+
+    // Inicializar variable para la sumatoria de los montos abonados
+    sumatoriaMontosAbonados=0;
+
+    Mientras NOF() Hacer 
+        leer registro
+
+        // Verificar posibles errores
+        Si M2<M1 Entonces
+            imprimir "Error: Monto entregado menor que el monto a abonar para la persona " + numeroPersona
+            saltar
+	FinSi
+
+        vuelto=M2-M1
+
+        imprimir "Número de la persona: " + Numero
+        imprimir "Monto a abonar: " + M1
+        imprimir "Monto entregado: " + M2
+        imprimir "Vuelto: " + vuelto
+
+        sumatoriaMontosAbonados=sumatoriaMontosAbonados + M1
+    FinMientras
+    cerrar archivo
+    imprimir "Sumatoria de los montos abonados: " + sumatoriaMontosAbonados
+Fin

@@ -1,0 +1,72 @@
+13. Validar los campos del archivo de transacciones de stock cuyos registros tienen los
+siguientes campos: Número - Ubicación - Almacén - Depósito - Existencia
+Validaciones a realizar:
+· Número de artículo: debe ser mayor que 1000 y menor o igual a 200.
+· Ubicación: debe ser igual o mayor que 0 y menor o igual a 500.
+· Almacén: si el campo anterior es del 0 al 200, este campo debe ser del 0 al 250; si el
+campo anterior es del 201 al 500, este campo debe ser del 400 al 450.
+· Depósito: si el campo anterior es del 0 al 200, este campo debe ser igual a 1; si es del
+400 al 450, este debe ser igual a 2.
+· Existencia: debe ser mayor que el stock mínimo y menor o igual que stock máximo.
+Los registros que no cumplen las condiciones especificadas se deben imprimir
+
+Subproceso validarTransaccionesStock(archivoEntrada, archivoSalidaValidos, stockMinimo, stockMaximo)
+    abrir archivoEntrada modo lectura
+    abrir archivoSalidaValidos modo escritura
+
+    Mientras NOF(archivoEntrada)
+        leer registro del archivoEntrada
+        
+        // Extraer campos del registro
+        numeroArticulo = registro.numeroArticulo
+        ubicacion = registro.ubicacion
+        almacen = registro.almacen
+        deposito = registro.deposito
+        existencia = registro.existencia
+
+        // Validar campos
+        esValido = true
+
+        Si numeroArticulo<=1000 O numeroArticulo>2000 entonces
+            esValido=false
+	FinSi
+        Si ubicacion<0 O ubicacion>500 entonces
+            esValido=false
+	FinSi
+        Si ubicacion>=0 Y ubicacion<=200 entonces
+            Si almacen<0 O almacen>250 entonces
+                esValido=false
+	    FinSi
+            Si deposito!=1 entonces
+                esValido=false
+	    FinSi
+        Sino Si ubicacion>=201 Y ubicacion<=500 entonces
+            Si almacen<400 O almacen>450 entonces
+                esValido=false
+	    FinSi
+            Si deposito!=2 entonces
+                esValido=false
+	    FinSi
+	FinSi
+        Si existencia<=stockMinimo O existencia>stockMaximo entonces
+            esValido=false
+	FinSi
+        // Grabar registro en archivo correspondiente
+        Si esValido entonces
+            escribir registro en archivoSalidaValidos
+        else
+            imprimir registro 
+    FinMientras
+    cerrar archivoEntrada
+    cerrar archivoSalidaValidos
+FinSubproceso
+
+
+Inicio Algoritmo 
+Escribir "Indica el stock minimo y luego el stock maximo";
+Leer stockmin;
+Leer stockmax;
+validarTransaccionesStock(transacciones, transaccionesvalidas, stockmin, stockmax)
+Escribir "Los registros validos fueron guardados en el archivo transaccionesvalidas exitosamente" 
+FinAlgoritmo 
+

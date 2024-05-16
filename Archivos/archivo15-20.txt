@@ -1,0 +1,20 @@
+Inicio algoritmo
+i=0;
+    abrir archivo modo lectura
+    Mientras NOF(Nombre, Notas)
+        leer registro
+      
+        // Extraer campos del registro
+        nombre=Nombre
+        notas=Notas // Asumimos que 'notas' es una lista de 11 elementos
+
+        // Calcular promedio
+        sumaNotas = 0
+        para i=1 hasta 11 hacer
+            sumaNotas=sumaNotas + notas[i]
+        promedio = sumaNotas / 11
+	Imprimir nombre sin saltar linea;
+	Imprimir " - "promedio 
+    FinMientras
+    cerrar archivo
+Fin

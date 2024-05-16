@@ -1,0 +1,88 @@
+12. Los registros de un archivo de stock, tienen los siguientes campos: Fecha (día, mes,
+año) - Número de orden - Número de almacén - Número de partida - Existencia - Número
+de proveedor.
+Se desea validar los campos citados, grabando el archivo de registros válidos con los
+registros correctos e imprimir los incorrectos.
+Reglas de validación:
+- Fecha: que sea una fecha lógica.
+- Número de orden: debe ser igual o mayor que 10
+- Número de almacén: de 1 hasta 5
+- Existencia: debe ser mayor que el stock mínimo
+- Número de proveedor: puede ser 1, 2, 3, 9, 10, 11.
+
+subproceso validarRegistrosStock(archivoEntrada, archivoSalidaValidos, stockMinimo)
+    abrir archivoEntrada modo lectura
+    abrir archivoSalidaValidos modo escritura
+
+    mientras NOF(archivoEntrada)
+        leer registro del archivoEntrada
+        
+        // Extraer campos del registro
+        fecha = registro.fecha
+        numeroOrden = registro.numeroOrden
+        numeroAlmacen = registro.numeroAlmacen
+        existencia = registro.existencia
+        numeroProveedor = registro.numeroProveedor
+
+        // Validar campos
+        esValido = true
+
+        Si !esFechaLogica(fecha) entonces
+            esValido = false
+	FinSi
+
+        Si numeroOrden < 10 entonces
+            esValido = false
+	FinSi
+        Si numeroAlmacen < 1 O numeroAlmacen > 5 entonces
+            esValido = false
+	FinSi
+        Si existencia <= stockMinimo entonces
+            esValido = false
+	FinSi
+        Si  !(numeroProveedor en [1, 2, 3, 9, 10, 11]) entonces
+            esValido = false
+
+        // Grabar registro en archivo correspondiente
+        Si esValido entonces
+            escribir registro en archivoSalidaValidos
+        Sino
+            imprimir registro 
+    FinMientras
+
+    cerrar archivoEntrada
+    cerrar archivoSalidaValidos
+FinSubproceso
+
+subproceso esFechaLogica(fecha)
+    // Asumiendo que fecha es una estructura con campos día, mes, año
+    dia = fecha.dia
+    mes = fecha.mes
+    año = fecha.año
+
+    Si año < 1 then
+        return false
+    FinSi
+    Si mes<1 O mes>12 then
+        return false
+    FinSi
+    diasEnMes = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    
+    // Comprobar si es año bisiesto
+    Si (año % 4 == 0 and año % 100 != 0) O (año % 400 == 0) entonces
+        diasEnMes[1] = 29 // Febrero tiene 29 días en años bisiestos
+    FinSi
+    Si (dia < 1 or dia > diasEnMes[mes - 1]) entonces
+        return false
+    FinSi
+    return true
+FinSubproceso
+
+Inicio algoritmo
+Escribir "Cual es el stock minimo?" 
+leer stockmin
+validarRegistrosStock(stock, validos, stockmin)
+FinAlgoritmo 
+
+
+	

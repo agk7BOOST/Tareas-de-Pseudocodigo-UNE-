@@ -1,0 +1,70 @@
+14.- Se desea seleccionar detectives para una misión especial internacional, para lo cual se
+cuenta con un archivo de agentes, cuyos registros tienen campos codificados de la siguiente
+manera:
+Sexo (SX, 1=femenino, 2=masculino), Estudios (ES, 1=universitario, 2=especialización,
+3=otros), Estado civil (EC, 1=soltero, 2=casado, 3=divorciado, 4=viudo), Nombre (NO),
+Sueldo (SD), Antigüedad (AN), Idiomas (ID, 1- 10).
+El personal apto para dicha misión debe reunir los siguientes requisitos:
+a) Si es del sexo femenino:
+Edad : 20 a 35 años
+Estudios : universitario o especialización
+Idioma : aceptar solamente los códigos del 1 al 3
+Estado civil : 1, 2, 0 4
+Sueldo básico : no más de Gs. 1.000.000.
+b) Si es del sexo masculino:
+Edad : 22 a 45 años
+Estudios : universitario o especialización si tiene por lo menos 3 años de antigüedad.
+Idioma : aceptar los códigos del 1 al 3
+Estado civil : si es casado aceptar, si no tiene mas de dos hijos.
+Sueldo básico : no más de Gs. 1.500.000.
+Imprimir todos los registros que reúnan las condiciones expuestas
+
+subProceso seleccionarDetectives(archivoEntrada)
+    abrir archivoEntrada modo lectura
+
+    Mientras NOF(archivoEntrada)
+        leer registro del archivoEntrada
+
+
+        // Inicializar variable de aptitud
+        esApto <- false
+
+        Si SX==1 entonces // Femenino
+            Si ED>=20 Y ED<=35 entonces
+                Si ES==1 O ES==2 entonces //Universitaria o en especializacion 
+                    Si (ID en [1, 2, 3]) entonces //ID en la lista [1,2,3]
+                        Si (EC en [1, 2, 4]) entonces //Soltera casada o viuda
+                            Si SD<=1000000 entonces
+                                esApto=true
+			    FinSi
+			FinSi
+		   FinSi
+		FinSi
+	    FinSi
+        Sino Si SX==2 entonces // Masculino
+            Si ED>= 22 Y ED<=45 entonces
+                Si (ES==1 O (ES==2 Y AN>=3)) entonces //Universitario u especializacion con mas de 3 años de antiguedad
+                    Si (ID en [1, 2, 3]) entonces //ID se encuentra en la lista [1,2,3]
+                        Si EC==2 Y NHijos<=2 entonces //Casado con 2 hijos maximo 
+                            esApto=true
+			FinSi
+                        Si SD<=1500000 entonces 
+                            esApto=true
+			FinSi
+		   FinSi
+		FinSi
+	    FinSi
+	FinSi
+        // Imprimir registro si cumple las condiciones
+        Si esApto entonces
+            imprimir registro en arcguvideEntrada
+	FinSi
+    FinMientras
+    cerrar archivoEntrada
+FinSubproceso 
+//Algoritmo principal 
+Inicio algoritmo
+Escribir "A continuacion se mostraran el registro de agentes aptos para la mision"
+seleccionarDetectives(agentes)
+Escribir "Todos ellos son aptos para la operacion desactivar los misiles en Israel" 
+Fin algoritmo 

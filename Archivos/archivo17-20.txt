@@ -1,0 +1,39 @@
+Inicio
+    abrir archivo(ID, Nombre, Codigo) modo lectura
+    definir estadoCivil como cadena de caracteres;
+    anteriorNumeroEmpleado=-1;
+	
+    Mientras NOF()
+        leer registro
+        // Extraer campos del registro
+        numeroEmpleado=ID;
+        nombre=Nombre;
+        codigoEstadoCivil=Codigo;
+
+        // Verificar secuencia de número de empleado
+        Si numeroEmpleado <= anteriorNumeroEmpleado entonces
+            imprimir "Error: Registro fuera de secuencia - Número de empleado: " + numeroEmpleado
+            saltar;
+	FinSi
+        // Verificar código de estado civil
+        Si !(codigoEstadoCivil en [1, 2, 3]) entonces
+            imprimir "Error: Código de estado civil inválido - Número de empleado: " + numeroEmpleado
+            anteriorNumeroEmpleado=numeroEmpleado
+            saltar;
+	FinSi
+        // Determinar estado civil
+        Si codigoEstadoCivil==1 entonces
+            estadoCivil ="Casado"
+        Sino Si codigoEstadoCivil==2 entonces
+            estadoCivil="Soltero"
+        Sino
+            estadoCivil <- "Otro"
+	FinSi 
+        // Imprimir registro válido
+        imprimir "Número de empleado: " + numeroEmpleado + ", Nombre: " + nombre + ", Estado Civil: " + estadoCivil
+
+        // Actualizar número de empleado anterior
+        anteriorNumeroEmpleado <- numeroEmpleado
+    FinMientras
+    cerrar archivo
+Fin

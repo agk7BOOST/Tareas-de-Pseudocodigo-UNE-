@@ -1,0 +1,53 @@
+1)Desarrollar un algoritmo que permita leer 3 variables o campos A, B y C que están
+en un archivo de 2000 registros, verificar las siguientes condiciones:
+· A debe ser igual a 50 o menos
+· B debe ser por lo menos igual a 5 y no más de 8
+· C debe ser por lo menos 4
+- Si se cumplen las tres condiciones asignarle 100 a X
+- Si se cumplen las condiciones B y C, asignarle 80
+- Si solo se cumple B, asignarle 70
+- Si se cumplen A y B, asignarle 90
+- Si no se cumple B, asignarle 55
+
+Inicio de algoritmo 
+abrir archivo(A,B,C) 
+	c,x=0;
+	a,b,c=FALSO;	
+	mientras c<2000 hacer
+		Si(A<=50) entonces
+			a=VERDADERO;
+		FinSi	
+		Si((B>=5) Y (B<=8)) entonces
+			b=VERDADERO;
+		FinSi	
+		Si(C>=4) entonces	
+			c=VERDADERO;
+		FinSi
+		Si(!b) entonces
+		x=55;
+		finSi
+		Si(a Y b) entonces
+		x=90;
+		finSi
+		Si(!a Y b) entonces
+		x=70;
+		finSi
+		Si(b Y c) entonces
+		x=80;
+		finSi
+		Si(a Y b Y c) entonces
+		x=100;
+		finSi
+		IMP A;
+		IMP B;
+		IMP C;
+		IMP x;
+	x=0;		
+	c++;
+	a,b,c=FALSO;
+	leer registro 
+	fin mientras
+cerrar archivo 
+Fin algoritmo 
+
+	
