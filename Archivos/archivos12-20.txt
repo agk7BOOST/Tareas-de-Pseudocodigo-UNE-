@@ -10,19 +10,12 @@ Reglas de validación:
 - Existencia: debe ser mayor que el stock mínimo
 - Número de proveedor: puede ser 1, 2, 3, 9, 10, 11.
 
-subproceso validarRegistrosStock(archivoEntrada, archivoSalidaValidos, stockMinimo)
-    abrir archivoEntrada modo lectura
-    abrir archivoSalidaValidos modo escritura
+subproceso validarRegistrosStock(archivoEntrada, archivoSalidaValidos)
+    abrir archivoEntrada(fecha, numeroOrden, numeroAlmacen, existencia, numeroProveedor) modo lectura
+    abrir archivoSalidaValidos(fecha, numeroOrden, numeroAlmacen, existencia, numeroProveedor) modo escritura
 
     mientras NOF(archivoEntrada)
         leer registro del archivoEntrada
-        
-        // Extraer campos del registro
-        fecha = registro.fecha
-        numeroOrden = registro.numeroOrden
-        numeroAlmacen = registro.numeroAlmacen
-        existencia = registro.existencia
-        numeroProveedor = registro.numeroProveedor
 
         // Validar campos
         esValido = true
@@ -79,8 +72,6 @@ subproceso esFechaLogica(fecha)
 FinSubproceso
 
 Inicio algoritmo
-Escribir "Cual es el stock minimo?" 
-leer stockmin
 validarRegistrosStock(stock, validos, stockmin)
 FinAlgoritmo 
 
